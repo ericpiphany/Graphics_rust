@@ -3,12 +3,11 @@ use crate::{
     ray::{Ray, RayProperties},
     vec3::{Vec3, VectorProperties},
 };
-use interval::{Interval, EMPTY_INTERVAL, UNIVERSE_INTERVAL};
-use once_cell::sync::Lazy;
+use interval::{Interval};
+
 use std::vec::Vec;
 use std::{
-    borrow::Borrow,
-    sync::{Arc, Mutex},
+    sync::{Arc},
 };
 #[derive(Clone, Copy, Default, Debug)]
 pub struct HitRecord {

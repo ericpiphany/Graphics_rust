@@ -2,7 +2,7 @@
 mod vec3;
 
 use crate::vec3::Vec3;
-use crate::vec3::VectorProperties;
+
 
 pub struct Ray {
     pub(crate) origin: Vec3,

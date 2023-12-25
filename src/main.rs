@@ -1,14 +1,14 @@
-use std::borrow::Borrow;
-use std::f64::INFINITY;
-use std::io::{self, Write};
-use std::ops;
-use std::process::Output;
+
+
+
+
+
 use std::sync::Arc;
 
-use colour::Colour;
-use hittable::{HitRecord, Hittable, HittableList, Sphere};
-use ray::{Ray, RayProperties};
-use vec3::VectorProperties;
+
+use hittable::{HittableList, Sphere};
+
+
 mod colour;
 use crate::vec3::Vec3;
 mod camera;
@@ -18,7 +18,7 @@ mod ray;
 mod rtweekend;
 mod vec3;
 use camera::{Camera, CameraProperties};
-use interval::{Interval, EMPTY_INTERVAL, UNIVERSE_INTERVAL};
+
 
 fn main() {
     let camera = Camera::new(16.0 / 9.0, 1080);

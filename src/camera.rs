@@ -1,6 +1,6 @@
 use crate::colour;
 use crate::colour::write_colour;
-use crate::hittable;
+
 use crate::hittable::HitRecord;
 use crate::hittable::Hittable;
 use crate::interval;
@@ -8,7 +8,7 @@ use crate::ray::Ray;
 use crate::vec3::Vec3;
 use crate::vec3::VectorProperties;
 use colour::Colour;
-use interval::{Interval, EMPTY_INTERVAL, UNIVERSE_INTERVAL};
+use interval::{Interval, UNIVERSE_INTERVAL};
 #[derive(Debug, Clone, Copy, Default)]
 pub struct Camera {
     aspect_ratio: f64,

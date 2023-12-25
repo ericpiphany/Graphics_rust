@@ -1,6 +1,6 @@
 use std::ops;
 
-use crate::vec3;
+
 #[derive(Copy,Clone,Default,Debug)]
 pub struct Vec3 {
     pub(crate) x: f64,
