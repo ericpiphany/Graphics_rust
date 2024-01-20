@@ -3,7 +3,7 @@ pub struct Interval {
     pub min: f64,
     pub max: f64,
 }
-
+#[allow(dead_code)]
 impl Interval {
     pub fn new(min: f64, max: f64) -> Self {
         Self { min, max }
@@ -16,8 +16,19 @@ impl Interval {
     pub fn surrounds(&self, x: f64) -> bool {
         self.min < x && x < self.max
     }
+    pub fn clamp(&self, x: f64) -> f64 {
+        let retval: f64;
+        retval = if x < self.min {
+            self.min
+        } else if x > self.max {
+            self.max
+        } else {
+            x
+        };
+        retval
+    }
 }
-
+#[allow(dead_code)]
 // Constants
 pub const EMPTY_INTERVAL: Interval = Interval {
     min: f64::INFINITY,

@@ -2,8 +2,7 @@
 mod vec3;
 
 use crate::vec3::Vec3;
-
-
+#[derive(Default)]
 pub struct Ray {
     pub(crate) origin: Vec3,
     pub(crate) direction: Vec3,

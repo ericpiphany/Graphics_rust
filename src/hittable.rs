@@ -1,26 +1,29 @@
-use crate::interval;
 use crate::{
+    interval,
     ray::{Ray, RayProperties},
     vec3::{Vec3, VectorProperties},
+    material::Material,
 };
-use interval::{Interval};
+use interval::Interval;
+use std::{sync::Arc, vec::Vec};
 
-use std::vec::Vec;
-use std::{
-    sync::{Arc},
-};
-#[derive(Clone, Copy, Default, Debug)]
+#[derive(Clone,Default,Debug)]
 pub struct HitRecord {
-    pub(crate) p: Vec3,
-    pub(crate) n: Vec3,
-    pub(crate) t: f64,
+    pub(crate) p: Vec3,//The point itself
+    pub(crate) n: Vec3,//Normal
+    pub(crate) mat_type: Material,
+    pub(crate) t: f64,//t parametre
     pub(crate) front_face: bool,
 }
+
+
+
 
 #[derive(Default)]
 pub struct Sphere {
     pub(crate) centre: Vec3,
     pub(crate) radius: f64,
+    pub(crate) mat_type: Material,
 }
 pub struct HittableList {
     pub(crate) objects: Vec<Arc<dyn Hittable>>,
@@ -74,14 +77,16 @@ impl Hittable for HittableList {
                 &mut temp_rec,
             ) {
                 hit_anything = true;
-                closest_so_far = temp_rec.unwrap().t;
-                *rec = Some(temp_rec.unwrap().clone()); // Wrap temp_rec in Some and assign to rec
+                closest_so_far = temp_rec.as_ref().map_or(ray_t.max, |temp_rec| temp_rec.t);
+                *rec = temp_rec.clone(); // Wrap temp_rec in Some and assign to rec
             }
         }
 
         hit_anything
     }
 }
+
+
 
 trait HitRecordProperties {
     fn set_face_normal(r: &Ray, outward_normal: &Vec3, rec: &mut Option<HitRecord>) -> ();
@@ -134,7 +139,12 @@ impl Hittable for Sphere {
 
         *rec = Some(HitRecord {
             p: hit_point,
-            n: if front_face { outward_norm } else { -outward_norm },
+            n: if front_face {
+                outward_norm
+            } else {
+                -outward_norm
+            },
+            mat_type: self.mat_type,
             t: temp,
             front_face,
         });
