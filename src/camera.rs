@@ -44,10 +44,15 @@ impl Camera {
             vfov: 90.0,    //Default vertical view angle.
             lookfrom: Vec3 {
                 x: 0.0,
+                y: 3.0,
+                z: 3.0, // this takes us a little bit farther away (z = 3.0)
+            },          // and lifts us a little (y = 3.0)
+            lookat: Vec3 {
+                x: 0.5,
                 y: 0.0,
-                z: -1.0,
-            },
-            lookat: Vec3::default(),
+                z: -1.5, // just for a fun "not looking straight at the object center"
+            },           // as the image center seems to be built around (0, 0, -1)
+                         // with these choices we will be looking at a downwards angle
             vup: Vec3 {
                 x: 0.0,
                 y: 1.0,
